@@ -1,0 +1,68 @@
+a<- 4
+b<- 3
+a+b
+suma <- a+b
+##suma
+# Operaciones de comparación
+a > b #¿ a es mayor que b ?
+a >= a 
+a < b # ¿ a es menor que b ?
+a <= b
+a==b# ¿ a es igual que b ?
+a==4
+a != b #¿ a es diferente a b?
+
+#######################
+
+#   Concepto de la función
+
+x <- abs (-2.5) ## abs es
+x
+help (abs)
+# pedir ayuda en R
+help (abs)
+
+## para asignar valores a variables en R se usa una <-
+x<-"hola" ####variable tipo caracter
+z<-6 # el igual solo funciona en unsa sola dirección
+## En este curso los obejtos o variables que se utilizan son de tipo caracter o tipo numerico
+ciudad <- "Toluca" # una entrada
+nombres <- c("Karla","Rodrigo","Miguel","Samuel") ## caracter y 4 entradas
+edad <- c(28,17,49,31) #numerico y 4 entradas
+## se utiliza la función class para preguntar a r que tipo de variables son
+class(nombres) #### tipo de variable
+class(edad)
+
+base1 <- data.frame(nombres,edad) # se crea una base de datos
+View (base1) ### ver base de los datos
+ls(base1) ### ver lista de varibles de base 1
+
+base1$edad ## Para conocer los datos de la varible edad de la base 1
+
+
+## ejercicio crear una variable de nombre sexo con 4 entradas , donde hombre es 1 y mujer es el valor 2
+# la primera entrada es mujer y las otras 3 son hombres
+#después de crear esta varible generen una nueva base 
+## de nombre base 2 con 3 varibles, nombre, edad y sexo
+sexo<-c(2,1,1,1)
+base2<-data.frame(nombres,edad,sexo)
+
+table(base2$sexo)
+table(base2$edad)
+table(base2$nombres)
+#####################################################################
+
+palumnos <- c(40,120,60,80) ## alumnos fac de economia
+etiq<- c("act","eco","rei","nib")
+
+help(pie)
+
+pie(palumnos)
+pie(palumnos,etiq)
+pie(palumnos,etiq,main="    Gráfica de pie de la 
+    facultad de economía", 
+    sub="Fuente: Facultad de Economía",
+    col=c("red2","navy blue","mediumorchid1","green"),
+    radius= 1,
+    clockwise= TRUE,
+    lty=23)
