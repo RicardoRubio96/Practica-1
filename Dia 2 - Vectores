@@ -1,0 +1,56 @@
+#####VECTORES#####
+
+a<-2+3 #vector longitud 1
+a
+b<-c(3,4)-c(6,1)##resta entrada por entrada y es un vector de 2 entradas
+c<-c(4,5,6)*c(5,2,1) ##vector 3 entradas 
+b
+c
+d<-c(1:50,7,99) ## el "1:50" significa que pone todos los valores desde el 1 hasta el 50
+length(d)
+## operaciones logicas con vectores####
+d>=45
+d==50
+d!=35
+
+##sucesiones con operaciones
+
+help(seq)
+z<-seq(0,30,3)##primer entrada es desde donde inicia , segunda entrada hasta donde termina y 
+                ##la tercer entrada cada cuando es la secuencia###
+
+seq(by=.1,to=30,from=0)
+seq(10)
+seq(2,10)
+secuencia<-seq(1,10,by=1)
+seq(1,10000000)
+sec2<-seq(300,130,-3)
+
+##### muestras################
+
+ingreso<-sample(20000:50000,100)
+ingreso<-sample(20000:50000,100)
+aleatorios<-sample()
+ingreso>=40000
+
+ingreso1 <- ingreso>40000
+ingreso1
+aleatorios<-sample(1:10,20,replace=TRUE)
+(aleatorios<-sample(1:10,20,replace=T))
+
+##para seleccionar algun número dentro del vector
+
+ingreso[50] ###saber el número de la posición 50
+ingreso[73]###saber el número de la posición 73
+ingreso[30:43] ##saber la posición del 30 al 43
+ingreso[ingreso>40000]
+ingreso[ingreso<22000]
+ingreso[c(30,33,23)]
+ingreso[ingreso>20000 & ingreso<30000]
+ingreso[seq(20,50,10)]
+ingreso[ingreso>20000 | ingreso<30000]
+
+######################## repetir ####################
+ss<- c(5,-7,9)
+rr<-rep(ss,times=5)
+rr
