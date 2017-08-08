@@ -1,0 +1,15 @@
+facultad<-c("economia","ingenieria","arquitectura","derecho")
+licenciatura<-c("actuaria","ing civil","arquitectura","derecho")
+calalumno<-c(6,4,10,8)
+class(facultad)
+class(licenciatura)
+class(calalumno)
+pie(calalumno,licenciatura,main="    Gráfica de pie de las 
+    calificaciones", 
+    sub="Fuente: UAEMEX",
+    col=c("red2","navy blue","mediumorchid1","green"),
+    radius= 1,
+    clockwise= TRUE,
+    lty=7)
+rm(facultad)
+rm(licenciatura)
