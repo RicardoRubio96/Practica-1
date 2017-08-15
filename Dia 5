@@ -1,0 +1,40 @@
+##INSTALAR PAQUETERÍAS DESDE INTERNET
+install.packages("foreign")
+install.packages("car")
+#De esta forma instalamos desde internet multiples 
+install.packages(c("foreign","questionr","car"))
+#La paqueteria foreign sirve para exportar o importar bases de datos, questionr es para expandir frecuencias de 
+#bases de datos muestrales y car es para regresion
+#dentro de cada paquete vienen múltiples funciones que solo las podemos usar cuando mandamos a llamar el paquete
+#para mandar llamar una paqueteria instaladam library()y requiere ()son funciones equivalentes
+library(foreign)
+library(questionr)
+require(car)
+
+################### bajar base de datos con la misma lógica de la canción###################
+temporal<-tempfile()
+download.file("http://www.beta.inegi.org.mx/contenidos/proyectos/enchogares/regulares/enie/microdatos
+              /enoe_15ymas/2017/2017triml_dbf.zip",temporal)
+files=unzip(temporal,list=TRUE)$Name
+unzip(temporal,files=files[grep1(dbf])
+                           
+
+require(foreign)                           
+mti2015<-read.dbf("C://Users//SALA-D12//Desktop//mti2015_05_17_sdem_precodificado.DBF")  
+
+table(mti2015$SEX)
+install.packages("questionr")
+require(questionr)
+wtd.table(mti2015$SEX,weights=mti2015$FAC_MTI)
+ls(mti2015)
+sum(mti2015$FAC_MTI)
+table(mit2015$R_DEF_ENOE)
+table(mti2015$CS_P12)
+wtd.table(mti2015$CS_P12,weights=mti2015$FACu_MTI)# N datos de una muestra
+wtd.table(mti2015$EDA,mti2015$CS_P12,weights=mti2015$FAC_MTI)
+edomex<-subset(mti2015,mti2015$ENT==15)
+edomexmuj<-subset(mti2015,mti2015$ENT==14 & mti2015$SEX==12) ## cantidad de personas de dos estados
+aguas<-subset(mti2015,mti2015$ENT=="01" | mti2015$SEX==32)
+table(aguas$ENT)
+as.character(as.numeric(mti2015$ENT))
+class(mti2015$ENT)
