@@ -1,0 +1,43 @@
+####### Recodificar el nombre de la variable
+table(mti15$RAMA1)
+mti15$RAMA<-as.numeric(mti15$RAMA)
+class(mti15$RAMA4)
+table(mti15$RAMA)
+mti15$RAMA4[mti15$RAMA == 1] <- 1
+mti15$RAMA4[mti15$RAMA == 2 | mti15$RAMA == 3] <- 2
+mti15$RAMA4[mti15$RAMA == 4 | mti15$RAMA == 5] <- 3
+mti15$RAMA4[mti15$RAMA == 6 | mti15$RAMA == 7] <- 4
+
+table(mti15$RAMA4)
+table(mti15$EDA)
+install.packages("plyr")
+library(plyr)
+rename()
+############################ejercicio##############################
+mti15$EDA1<-as.character(mti15$EDA)
+mti15$EDA2<-as.numeric(mti15$EDA1)
+
+mti15$GPOEDA2[mti15$EDA2==05|mti15$EDA2==06|mti15$EDA2==07]<-1
+mti15$GPOEDA2[mti15$EDA2==08|mti15$EDA2==09|mti15$EDA2==10|mti15$EDA2==11]<-2
+mti15$GPOEDA2[mti15$EDA2==12|mti15$EDA2==13|mti15$EDA2==14]<-3
+mti15$GPOEDA2[mti15$EDA2==15|mti15$EDA2==16|mti15$EDA2==17]<-4
+mti15$GPOEDA2 <- factor(mti15$GPOEDA2, levels = c(1,2,3,4), labels = c("Niñ@s", "Pre ado", "ado", "Jóvenes"))
+table(mti15$GPOEDA2)
+install.packages("questionr")
+install.packages("weights")
+wtd.table(mti15$GPOEDA2,weights=mti15$FAC_MTI)
+#########################IMPORTAR DATOS A EXCEL###################################
+require(questionr)
+t<-wtd.table(mti15$GPOEDA2,weights=mti$FAC_MTI)
+t
+write.csv(t,file="Practica1.csv")
+
+###################################################################################
+##Buscar otra forma de exportar varias tablas a la vez en excel
+##Graficar la variable GPPOEDA2 y exportarla a un PDF Y ENVIARLA A serobles99@gmail.com
+##
+##
+##
+##
+##
+##
