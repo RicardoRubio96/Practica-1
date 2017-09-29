@@ -1,0 +1,66 @@
+#############Ejercicio Clase################
+# Se busca la relación de estatura (x) con longitud de salto (y)
+
+x<-c(170,172,173,174,174,175,176,177,180,180,180,180,180,181,181,182,182,182,182,184,184,185,186,188)
+y<-c(.84,1.31,1.42,1.03,1.07,1.08,1.04,1.8,1.45,1.60,1.61,2.13,2.15,.84,1.43,.90,1.81,1.94,2.68,1.49,2.52,3.00,1.87,3.08)
+
+#1) Determine la ecuación de la recta de regresión estimada
+#2) Calcule una estimación puntual del salto horizontal promedio
+# cuando la estatura d ela persona es de 182
+#3) Calcule los valores de los residuos de min. cuadrado de las 4 observaciones con las
+# cuales la estatura es de 182
+#4)¿Qué proporción de la variación observada en el salto horizontal es atribuida a la relación
+#de la regresión lineal simple? # R=45%
+
+mediax<-mean(x) ##media consumo
+mediay<-mean(y) ##media emisiones
+sumax<-sum(x) ##suma del consumo energetico
+sumay<-sum(y) ##suma de las emisiones contaminantes
+producto<-x*y ##multiplicacion de emisiones por consumo
+sumaproducto<-sum(producto) ##la suma de los productos de ambas variables
+consumo2<-x^2 ##la variable consumo elevvada al cuadrado
+sumaconsumo2<-sum(consumo2)
+sumax2<-sumax^2
+SXY<-sumaproducto-(sumax*sumay/24)
+SXX<-sumaconsumo2-(sumax2/24)
+B1<-SXY/SXX
+B0<-mediay-B1*mediax
+
+E<-B0+B1*x
+residuos<-(y-E)
+residuos2<-y^2
+SSE<-sum(residuos2)
+S2<-SSE/24
+#1)
+#Recta de Regresión
+
+#y=B0+B1x
+#2)
+Valorresiduo<-B0+B1*182
+Valorresiduo
+#3)
+valor1<-.90-valorresiduo
+valor1
+valor2<-1.82-Valorresiduo
+valor2
+valor3<- 1.94-Valorresiduo
+valor3
+valor4<-2.68-Valorresiduo
+valor4
+
+
+sumaresiduos<-valor1+valor2+valor3+valor4
+sumaresiduos
+
+
+
+
+#############Segunda forma######################
+mdo1<-lm(y~x)
+summary(mdo1)
+names(mdo1)
+mdo1$coefficients
+
+
+plot(y~x,xlab="estatura",ylab="salto horizontal",xlim=c(160,190),ylim=c(.80,3.2),main="Gráfica Diagrama de dispersión")
+abline(mdo1)
