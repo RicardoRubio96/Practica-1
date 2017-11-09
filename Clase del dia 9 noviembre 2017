@@ -41,3 +41,9 @@ summary(completo1)
 ###El modelo nulo fue B2 con la constante 1
 ###El modelo completo fue B2 con todas las otras variables
 ####El mejor modelo segun con el AIC es el modelo de B2~B3+B4 con un AIC=-13.35
+###El modelo nulo fue B2 con la constante 1
+###El modelo completo fue B2 con todas las otras variables
+####El mejor modelo segun con el AIC es el modelo de B2~B3+B4 con un AIC=-13.
+mod2<-lm(B2~B3+B4)
+summary(mod2)
+#Tiene una R2 de 83.77% y el error estándar es cercano a 0 , que es de .4542
