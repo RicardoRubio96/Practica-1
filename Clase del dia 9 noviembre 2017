@@ -1,0 +1,43 @@
+require(stats)
+base<-data.frame(swiss)
+View(base)
+
+
+#Analisis exploratorio
+names(base)
+pairs(base)
+cor(base)
+
+#Propuesta Modelo de Regresión múltiple con base en el análisis exploratorio
+regresion1<-lm(Infant.Mortality~Fertility,data=base)
+
+#Modelo Propuesto anteriormente
+nulo<-lm(Fertility~1,data=base)
+completo<-lm(Fertility~.,data=base)
+step(nulo,scope=list(lower=nulo,upper=completo),direction="forward")
+summary(completo)
+help(step)
+
+
+
+B1<-c(4330,5500,5550,4700,5200,5500,4700,5500,5800,5000)
+B2<-c(2,3,4,3,4,4,4,5,5,5)
+B3<-c(190,219,249,249,250,340,289,395,439,525)
+B4<-c(4340,5540,5540,4740,5240,5550,4750,5550,5850,5050)
+B5<-c(3,4,5,4,3,3,4,6,5,6)
+base1<-data.frame(B1,B2,B3,B4,B5)
+
+names(base1)
+pairs(base1)
+cor(base1)
+
+mod1<-lm(B1~B2,data=base1)
+nulo1<-lm(B2~1,data=base1)
+
+completo1<-lm(B2~.,data=base1)
+step(nulo1,scope=list(lower=nulo1,upper=completo1),direction="both")
+summary(completo1)
+
+###El modelo nulo fue B2 con la constante 1
+###El modelo completo fue B2 con todas las otras variables
+####El mejor modelo segun con el AIC es el modelo de B2~B3+B4 con un AIC=-13.35
