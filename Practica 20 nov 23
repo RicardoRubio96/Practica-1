@@ -1,0 +1,154 @@
+t_resp <- c(71,53,55,48,69,84,21,68,68)
+potasio <- c(388,258,292,205,449,331,114,580,622)
+zinc <- c(2414,10693,11682,12560,2464,2607,16250,2005,1825)
+estudio <- data.frame(t_resp,potasio,zinc)
+pairs(estudio)
+cor(estudio)
+regnull <- lm(t_resp~1,data=estudio)
+allreg <- lm(t_resp~.,data=estudio)
+step(regnull,scope=list(lower=regnull,upper=allreg),direction="forward")
+
+# EL MEJOR MODELO
+
+mod1 <-  lm(formula = t_resp ~ zinc, data = estudio)
+summary(mod1)
+# error de 8.36, r de .78, f de 30.75 y p-value 0.0008
+# se acepta 
+
+# PRUEBAS
+
+shapiro.test(rstudent(mod1))
+# p-value de .83 > 0.05
+install.packages("lmtest")
+require(lmtest)
+bptest(mod1)
+#p-value de 0.31 >0.05
+dwtest(mod1,alternative="two.sided")
+#p-value de 0.96 >0.05
+# dw de 2.02
+# ECUACION DEL MODELO
+
+summary(mod1)
+#y=0.79.47-0.0028x1 + e
+
+# INTERPRETACION DEL MODELO 
+
+# en este modelo podriamos decir que por cada unidad 
+# que aumenta el zinc la respiracion disminuye en 0.002 la 
+# tasa de respiracion 
+
+
+############Límites para predecir
+limestudio<-seq(min(estudio$zinc),max(estudio$zinc),length=9)
+limestudio<-data.frame(limestudio)
+limestudio
+limestud<-predict.lm(allreg,limestudio,interval="prediction",se.fit=TRUE,data=estudio)
+head(limestud$fit)##te generan los limites
+###Para dibujar los límites
+matplot(limestudio,limestud$fit,type="l")
+
+##############Predicciones########
+predict(allreg,data.frame(zinc=10000,potasio=40),interval="predict")
+# con valores queremos conocer cual es la respiracion cuando zinc y potasio toman esos valores
+
+
+###############################################################################
+###############################################################################
+
+peso <- c(74,92,63,58,78,85,85,73,62,80,72,74)
+altura <- c(168,196,170,175,162,169,190,186,176,170,176,179)
+ritmo <- c(62,75,60,71,66,62,79,74,70,66,71,69)
+edad <- c(25,31,29,64,44,41,37,35,34,29,19,50)
+
+rit_card <- data.frame(ritmo,peso,altura,edad)
+pairs(rit_card)
+cor(rit_card)
+regnull <- lm(ritmo~1,data=rit_card)
+allreg <- lm(ritmo~.,data=rit_card)
+step(regnull,scope=list(lower=regnull,upper=allreg),direction="forward")
+
+# EL MEJOR MODELO
+
+mod2 <-  lm(formula = ritmo ~ altura, data = rit_card)
+summary(mod2)
+# error de 3.30, r de .67, f de 23.59 y p-value 0.0006
+# se acepta 
+
+# PRUEBAS
+
+shapiro.test(rstudent(mod2))
+# p-value de .94 > 0.05
+install.packages("lmtest")
+require(lmtest)
+bptest(mod2)
+#p-value de 0.44 >0.05
+dwtest(mod2,alternative="two.sided")
+#p-value de 0.89 >0.05
+# dw de 1.91
+
+# ECUACION DEL MODELO
+
+summary(mod2)
+#y=-17.14.47+0.48x1 + e
+
+# INTERPRETACION DEL MODELO 
+
+# en este modelo podriamos decir que por cada 0.48 que aumente 
+# la altura, entonces el ritmo cardiaco va a aumentar en 
+# una unidad
+
+############Límites para predecir
+limestudio2<-seq(min(rit_card$altura),max(rit_card$altura),length=12) # altura por que es la del mejor modelo
+limestudio3<-seq(min(rit_card$edad),max(rit_card$edad),length=12)
+limestudio4<-seq(min(rit_card$peso),max(rit_card$peso),length=12)
+limestudioT<-data.frame(limestudio2,limestudio3,limestudio4)
+limestudioT
+limestud2<-predict.lm(allreg,limestudioT,interval="prediction",se.fit=TRUE,data=rit_card)
+head(limestud2$fit)##te generan los limites
+###Para dibujar los límites
+matplot(limestudioT,limestud2$fit,type="l")
+
+##############Predicciones########
+predict(allreg,data.frame(peso=60,edad=61,altura=190),interval="predict")
+# con valores queremos conocer cual es el ritmo cardiaco con esos valores , el cual es de 77.63
+
+########################################################################################
+########################################################################################
+
+cajas <- c(10,15,10,20,25,18,12,14,16,22,24,17,13,30,24)
+distancia <- c(30,25,40,18,22,31,26,34,29,37,20,25,27,23,33)
+tiempo <- c(24,27,29,31,25,33,26,28,31,39,33,30,25,42,40)
+length(tiempo)
+holamundo<-data.frame(cajas,distancia,tiempo)
+nulo<-lm(tiempo~1,data=holamundo)
+completo<-lm(tiempo~.,data=holamundo)
+step(nulo,scope=list(lower=nulo,upper=completo),direction="forward")
+definitive<-lm(tiempo~cajas,data=holamundo)
+summary(definitive)
+
+shapiro.test(rstudent(definitive))
+# p-value de .94 > 0.05
+install.packages("lmtest")
+require(lmtest)
+bptest(definitive)
+#p-value de 0.44 >0.05
+dwtest(definitive,alternative="two.sided")
+#p-value de 0.89 >0.05
+# dw de 1.91
+
+# no cumple normalidad y hay que corregir
+install.packages("car")
+require(car)
+outlierTest(allreg,cutoff=.05,n.max=5,order=T)# te da la observacion que esta mal
+influencePlot(allreg,id.n=5)
+# LA OBSERVACION 5 SE INDICA CON PROBLEMAS
+# AHORA PARA CONFIRMAR LOS CASOS QUE TIENEN IMPLICACIONES
+# EN EL MODELO SE APLICA EL GRAFICO DE DISTANCIAS DE COOK 
+cmod2<- cooks.distance(completo)
+etique <- rownames(cajas)
+install.packages("faraway")
+require(faraway)
+halfnorm(cmod2,labs=etique,ylab="dist cook")
+# aqui esperamos un dato mayor a 1 para comprobar que si es atipico
+# el numero mas alto el 5 por lo que se debe eliminar
+# y volver a aplicar modelo 
