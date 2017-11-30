@@ -1,0 +1,37 @@
+########Ricardo Rubio Cadena EJERCICIO ##########
+
+data<-read.spss("C:/Users/Richi1/Downloads/solorural.sav")
+
+sexo<-data$SEX
+grupoedad<-data$EDA1
+jefedelhogar<-data$SEX_JEFE
+trabajafamiliar<-data$T_PER
+ocupacion<-data$OCU_JEFE
+apoyo<-data$T_APO1
+
+sex<-na.omit(sexo)
+edad<-na.omit(grupoedad)
+jefe<-na.omit(jefedelhogar)
+trabaja<-na.omit(trabajafamiliar)
+ocupa<-na.omit(ocupacion)
+beca<-na.omit(apoyo)
+
+
+
+base<-data.frame(sex,edad,jefe,trabaja,ocupa,beca)
+
+####Para quitar datos que queremos excluir###
+
+trabaja<-base[base$trabaja!="No Sabe"]
+
+##############################################
+
+modelo.logit<-multinom(trabaja~sex+edad+jefe+ocupa+beca,data=base,family="binomial")
+
+summary(modelo.logit)
+exp(coefficients(modelo.logit))
+
+log.odds <- predict(modelo.logit, data.frame(sex=1,edad=2,jefe=2,ocupa=2,beca=2))
+log.odds
+
+exp(log.odds)/(1-exp(log.odds))
